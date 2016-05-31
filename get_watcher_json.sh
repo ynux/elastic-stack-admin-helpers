@@ -34,7 +34,13 @@ fi
 
 echo "$(date) : Starting $SCRIPTNAME" | tee -a $LOGFILE
 
-NUM_WATCHES=$(/usr/bin/curl $CREDENTIALS -s $HOST:9200/_cat/count/.watches | cut -d" "  -f3)
+WATCHES=$(/usr/bin/curl $CREDENTIALS -s $HOST:9200/_cat/count/.watches)
+if [ $(echo $WATCHES | grep -wc error) -gt 0 ]; then
+  echo "You got an error in your first curl, exiting" | tee -a $LOGFILE
+  exit 2 
+else
+  $NUM_WATCHES=$(echo $WATCHES | cut -d" "  -f3)
+fi
 
 echo "$(date) : Getting the json of your $NUM_WATCHES .watches ..." | tee -a $LOGFILE
 
