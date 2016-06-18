@@ -1,5 +1,5 @@
-
-se:     Spool json of templates to disk
+#!/bin/bash
+#Purpose:     Spool json of templates to disk
 #              for versioning (e.g. in git), backup and easier update 
 # https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-templates.html   
 # 2016.05.31   S.Kim
